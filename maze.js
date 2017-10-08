@@ -1,16 +1,26 @@
 
- //This flag is set to to false  to indicate that class is not assigned to element as yet
-let checkElementForClass = false;
+//initialized as false since boundary is not touched yet
+var checkIfboundaryTouched = false;
 
- window.onload = function()
- {
-   var boundary1 = document.getElementById('boundary1');
-
-   boundary1.onmouseover=function(){
-     if(!checkElementForClass){
-       //This flag is set to true to indicate that class "youlose" is assigned to element
-       checkElementForClass = true;
-   		   boundary1.className += " youlose";
-   	   }
+window.onload = function()
+{
+  var boundaries = document.querySelectorAll('.boundary');
+  for (var i = 0; i < boundaries.length - 1; i++) {
+        boundaries[i].onmouseover = boundaryTouched;
     }
- }
+}
+
+/*This fuction Checks if the class youlose has already been applied to the boundaries
+and if not apply it, this is to prevent it from being applied everytime the mouse over
+function event is ran*/
+
+function boundaryTouched()
+{
+  if(!checkIfboundaryTouched){
+    checkIfboundaryTouched = true;
+  var boundaries = document.querySelectorAll('.boundary')
+  for (var i = 0; i < boundaries.length - 1; i++) {
+      boundaries[i].className += " youlose";
+      }
+   }
+}
