@@ -1,6 +1,7 @@
 
 //Globally defined variables
-var boundaries; var end; var start; var checkIfboundaryTouched = false;
+var boundaries; var end; var start; var statuss; var winGame = false;
+var checkIfboundaryTouched = false;
 
 window.onload = function()
 {
@@ -9,6 +10,7 @@ window.onload = function()
   end.onmouseover = testWin;
   start = document.getElementById('start');
   start.onclick = restart;
+  statuss = document.getElementById('status');
   for (var i = 0; i < boundaries.length - 1; i++) {
         boundaries[i].onmouseover = boundaryTouched;
     }
@@ -19,19 +21,24 @@ boundaries and if not apply it, this is to prevent it from being applied
 everytime the mouse over function event is ran*/
 let boundaryTouched = () =>
 {
-  if(!checkIfboundaryTouched){
-    checkIfboundaryTouched = true;
-  var boundaries = document.querySelectorAll('.boundary')
-  for (var i = 0; i < boundaries.length - 1; i++) {
+  if (winGame === false)
+  {
+      if(!checkIfboundaryTouched){
+        checkIfboundaryTouched = true;
+      var boundaries = document.querySelectorAll('.boundary');
+     statuss.innerHTML = 'YOU LOSE!!!! :-( :-( CLICK YOUR MOUSE ON THE "S" TO BEGIN AGAIN';
+      for (var i = 0; i < boundaries.length - 1; i++) {
       boundaries[i].className += " youlose";
       }
-   }
+    }
+  }
 }
-//This function checks if any boundary is touched and it not, alerts "You win"
+//This function checks if any boundary is touched and it not, indicates that you win."
 let  testWin =() =>
 {
   if(!checkIfboundaryTouched){
-    alert("YOU WIN!!!");
+    winGame = true;
+    statuss.innerHTML = 'YOU WIN!!!! :-) :-) CLICK YOUR MOUSE ON THE "S" TO BEGIN AGAIN';
   }
 }
 
@@ -40,7 +47,9 @@ that no boundary as been touched and the loop sets the div classes back to
 boundary*/
 let restart = () =>
 {
+  winGame = false;
   checkIfboundaryTouched = false;
+  statuss.innerHTML = 'Move your mouse over the "S" to begin.'
   for (var i = 0; i < boundaries.length - 1; i++) {
       boundaries[i].className = "boundary";
     }
