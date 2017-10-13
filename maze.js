@@ -14,6 +14,8 @@ window.onload = function()
   for (var i = 0; i < boundaries.length - 1; i++) {
         boundaries[i].onmouseover = boundaryTouched;
     }
+  maze = document.getElementById('maze');
+  maze.onmouseleave = boundaryTouched;
 }
 
 /*This function Checks if the class youlose has already been applied to the
